@@ -34,7 +34,7 @@ namespace WebBanHang.Controllers
             SanPham sp;
             foreach(var item in lstModel)
             {
-                //Cập nhật số lương tồn
+                //Cập nhật số lương tồn hang
                 sp = db.SanPhams.Single(n => n.MaSP == item.MaSp);
                 sp.SoLuongTon += item.SoLuongNhap;
                 // gán mã phiếu nhập cho tất cả chi tiết phiếu nhập

@@ -298,6 +298,7 @@
     <Compile Include="Controllers\QuanLySanPhamController.cs" />
     <Compile Include="Controllers\QuyenController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
+    <Compile Include="Controllers\SuggestSanPhamController.cs" />
     <Compile Include="Controllers\ThongKeController.cs" />
     <Compile Include="Controllers\TimKiemController.cs" />
     <Compile Include="Global.asax.cs">
@@ -434,6 +435,7 @@
     <Folder Include="Content\ProductLayout\css\" />
     <Folder Include="Content\ProductLayout\images\" />
     <Folder Include="Content\ProductLayout\js\" />
+    <Folder Include="Views\SuggestSanPham\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

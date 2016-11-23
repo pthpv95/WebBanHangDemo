@@ -54,7 +54,7 @@ namespace WebBanHang.Controllers
             {
                 return HttpNotFound();
             }
-            return View(sp);
+            return View(sp);//demo
         }
         //action load sp theo ma loai sp va nsx
         public ActionResult SanPham(int? MaLoaiSP,int? MaNSX,int? page)
