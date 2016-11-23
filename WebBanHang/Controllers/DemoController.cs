@@ -11,6 +11,7 @@ namespace WebBanHang.Controllers
         // GET: Demo
         public ActionResult Index()
         {
+            //this is demo controller
             return View();
         }
     }
