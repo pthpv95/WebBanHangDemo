@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebBanHang.Models.SanPham>
+
+@{ 
+    int iDem = 0;
+    int iSLSanPhamTrenTrang = 3;
+    int iTrang = 1;
+}
+
+<div class="col-md-9 product1">
+    <div class="bottom-product">
+        @foreach (var item in Model.OrderBy(n => n.DonGia))
+        {
+            if(iDem % iSLSanPhamTrenTrang == 0 && iDem!=0)
+            {
+                iTrang++;
+            }
+            <div class="@Url.Content("col-md-4 bottom-cd simpleCart_shelfItem Trang" + iTrang.ToString())">
+                <div class="product-at ">
+                    <a href="@Url.RouteUrl("XemChiTiet",new { @id = item.MaSP,@tensp= item.TenSP })">
+                        <img class="img-responsive" src="@Url.Content("~/Content/Pictures/"+ item.HinhAnh)" alt="">
+                        <div class="pro-grid">
+                            <span class="buy-in">Buy Now</span>
+                        </div>
+                    </a>
+                </div>
+                <p class="tun">@item.TenSP</p>
+                @*the <a/> la nut them*@
+                <a href="@Url.Action("ThemGioHang","GioHang",new {@MaSP=item.MaSP,@strURL= Request.Url.ToString()})" class="item_add"><p class="number item_price"><i> </i>@item.DonGia.Value.ToString("#,##")</p></a>
+                @*Thêm giò hàng Ajax*@
+                @Ajax.ActionLink("Thêm giỏ hàng Ajax", "ThemGioHangAjax", "GioHang", new { @MaSP = item.MaSP,@class="themgiohangcss" }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divGioHang", InsertionMode = InsertionMode.Replace }, null)
+
+            </div>
+            iDem++;
+        }
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<div class="Trang">
+    @for (int i = 1; i <= iTrang; i++)
+    {
+        <a class= "linkTrang" data-sotrang="@Url.Content("Trang" + i)" href="#">@i</a>
+    }
+</div>
+<style>
+    .simpleCart_shelfItem{
+        display:none;
+    }
+    .Trang1{
+        display:block;
+    }
+    .themgiohangcss{
+        border:1px solid black;
+        background-color:orangered;
+    }
+</style>
+<script>
+    $('.linkTrang').click(function () {
+        $(".simpleCart_shelfItem").hide();
+        //Lay so trang tu the a
+        var sotrang = $(this).attr('data-sotrang');
+        $("." + sotrang).show();
+    })
+</script>

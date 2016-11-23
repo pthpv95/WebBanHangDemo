@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "DemoAjax";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+
+<h2>DemoAjax</h2>
+@*Ajax dung actionlink*@
+@*@Ajax.ActionLink("Load Ajax MVC","LoadAjaxActionLink",new AjaxOptions {HttpMethod="GET",UpdateTargetId="ketqua",InsertionMode= InsertionMode.InsertAfter, LoadingElementId = "divLoading" })*@
+
+
+
+@*Ajax dung begin form*@
+
+@*@using(Ajax.BeginForm("LoadAjaxBeginForm",new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "ketqua", InsertionMode = InsertionMode.Replace,LoadingElementId= "divLoading" }))
+{
+    <input name="txt1" />
+    <input type="submit"value="Submit" />
+}*@
+
+@*<input type="button"  id="button" value="SubmitAjax"/>
+<input id="txt1" />
+<input id="txt2" />
+
+<script>
+    $("#button").click(function () {
+        $('#divLoading').show();
+        var thamso1 = $('txt1').val();
+        var thamso2 = $('txt2').val();
+    $.ajax({
+    type: 'GET',
+    data: { a: thamso1, b: thamso2 },
+    url: "LoadAjaxJQuerry",
+    success: function (ketqua)
+    {
+        $('#divLoading').hide();
+        $('#ketqua').html(ketqua);
+    }
+    })
+    })
+</script>*@
+<div id="divLoading" style="display:none">
+    <img src="~/Content/Pictures/imageloading.gif" />
+</div>
+
+@*Load ajax su dung jQuerry*@
+<div id="ketqua" style="height:150px">
+    Ket qua tra ve
+</div>
+
+@*Load partial view by ajax*@
+@Ajax.ActionLink("Load Ajax MVC", "LoadSanPhamAjax", new AjaxOptions {HttpMethod="GET",UpdateTargetId="ketqua",InsertionMode= InsertionMode.InsertAfter, LoadingElementId = "divLoading" })

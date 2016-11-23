@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebBanHang.Models.DonDatHang>
+@{
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 20);
+}
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Quản lý đơn hàng </h2>
+
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="@Url.Action("ChuaThanhToan","QuanLyDonHang")">CHƯA THANH TOÁN</a></li>
+    <li role="presentation"  class="active"><a href="@Url.Action("ChuaGiao","QuanLyDonHang")">CHƯA GIAO & ĐÃ ĐẶT HÀNG</a></li>
+    <li role="presentation"><a href="@Url.Action("DaGiaoDaThanhToan","QuanLyDonHang")">ĐÃ GIAO</a></li>
+</ul>
+
+@*Dùng control wegrid đề hiện dữ liêu model**@
+@grid.GetHtml(
+        tableStyle: "gridTable",
+        headerStyle: "gridHead",
+        footerStyle: "gridFooter",
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAltRow",
+        columns: grid.Columns(
+        grid.Column("MaDDH", header: "Mã đơn đăt hàng"),
+        grid.Column("MaKH", header: "Tên khách hàng", format: p => p.MaKH != null ? p.KhachHang.TenKH : ""),
+        grid.Column("NgayDat", header: "Ngày đặt"),
+        grid.Column("TinhTrangDonHang", header: "Tình trạng giao hàng"),
+        grid.Column("NgayGiao", header: "Ngày giao"),
+        grid.Column("DaThanhToan", header: "Đã thanh toán"),
+        grid.Column("UuDai", header: "Ưu đãi"),
+         //grid.Column("HinhAnh", "Mô tả", format: p => @Html.Raw("<img src=\"../Content/Pictures/" + p.HinhAnh+"\">"))
+         grid.Column(format: p => @Html.ActionLink("Duyệt đơn hàng", "DuyetDonHang", new { id = p.MaDDH }, new { @target = "_blank" }))
+    ))
+<style>
+    .gridTable {
+        border: 1px solid black;
+        width: 100%;
+    }
+
+    .gridHead > th > a {
+        color: #fff;
+    }
+
+    .gridHead {
+        background-color: darkgrey;
+    }
+
+    .gridFooter {
+        font-weight: bold;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .gridRow {
+        border: 1px solid black;
+        background-color: lightcyan;
+    }
+
+        .gridRow > tr, td {
+            border: 1px solid black;
+        }
+</style>

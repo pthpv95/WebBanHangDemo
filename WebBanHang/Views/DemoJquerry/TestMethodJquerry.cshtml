@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "TestMethodJquerry";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>TestMethodJquerry</h2>
+
+@*<div class="abc">
+    <input type="text" class="test" data-giatri="123456" />
+    <input type="button" value="Xuat thong bao" id="btnXuatThongBao" /> 
+</div>*@
+@*Demo method each*@
+<div class="content1">abc1</div>
+<div class="content1">xyz1</div>
+<div class="content1">xyz2</div>
+<div class="content1">xyz3</div>
+<div class="content1">xyz4</div>
+<input type="button" value="Xuat thong bao" id="btnXuatThongBao" /> 
+<script>
+    //$('#btnXuatThongBao').click(function () {
+    //    $('.abc').prepend('<input>');
+    //    $('.abc').append('<input>');
+    //})
+
+    // Duyet vong lap each
+    $('#btnXuatThongBao').click(function () {
+        $('.content1').each(function () {
+            var noidung = $(this).text();
+            alert(noidung);
+        })
+    })
+</script>

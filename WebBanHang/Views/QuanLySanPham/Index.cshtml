@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebBanHang.Models.SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    //Khởi tạo controll WebGrid
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 20);
+}
+
+
+@*Thê hiện thông qua control WebGrid*@
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    columns: grid.Columns(
+    grid.Column("MaSP", "Mã Sản Phẩm"),
+    grid.Column("TenSP", "Tên sản phẩm"),
+    grid.Column("MoTa", "Mô tả", format: p => @Html.Raw(p.MoTa)),
+     //grid.Column("HinhAnh", "Mô tả", format: p => @Html.Raw("<img src=\"../Content/Pictures/" + p.HinhAnh+"\">"))
+     grid.Column(format: p => @Html.ActionLink("Chỉnh sửa", "ChinhSua", new { id = p.MaSP })),
+    grid.Column(format:p=>@Html.ActionLink("Xóa","Xoa",new {id=p.MaSP }))
+))
+<style>
+    .gridTable{
+        border:1px solid black;
+        width:100%;
+    }
+    .gridHead>th>a{
+        color:#fff;
+    }
+    .gridHead{
+        background-color:darkgrey;
+    }
+    .gridFooter{
+        font-weight:bold;
+        font-size:15px;
+        text-align:center;
+
+    }
+    .gridRow{
+        border:1px solid black;
+        background-color:lightcyan;
+    }
+    .gridRow>tr,td{
+         border:1px solid black;
+
+    }
+
+</style>
+
+

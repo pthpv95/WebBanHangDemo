@@ -1,0 +1,28 @@
+﻿
+@using WebBanHang.Models;
+@model IEnumerable<SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+@{
+    IEnumerable<SanPham> lstNike = (IEnumerable<SanPham>)ViewBag.ListNike;
+    IEnumerable<SanPham> lstAdidas = (IEnumerable<SanPham>)ViewBag.ListAdidas;
+    IEnumerable<SanPham> lstNewBalance = (IEnumerable<SanPham>)ViewBag.ListNewBalance;
+}
+<div class="content-top">
+    <h1>NEW NIKE SHOES</h1>
+    <div class="grid-in">
+        <div class="container">
+            @Html.Partial("~/Views/SanPham/SanPhamStyle1Partial.cshtml", lstNike)
+        </div>
+    </div>
+
+    <div class="grid-in">
+        <h1>NEW ADIDAS SHOES</h1>
+        <div class="container">
+            @Html.Partial("~/Views/SanPham/SanPhamStyle1Partial.cshtml", lstAdidas)
+        </div>
+    </div>
+</div>
+

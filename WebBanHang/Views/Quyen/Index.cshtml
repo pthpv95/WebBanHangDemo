@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebBanHang.Models.Quyen>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    WebGrid grid = new WebGrid(source: Model);
+}
+<h1>Quản lý quyền</h1>
+<input type="submit" value="Thêm quyền" class="btn btn-success" />
+@grid.GetHtml(
+        tableStyle: "gridTable",
+        headerStyle: "gridHead",
+        footerStyle: "gridFooter",
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAltRow",
+        columns: grid.Columns(
+        grid.Column("MaQuyen", header: "Mã quyền"),
+        grid.Column("TenQuyen", header: "Tên quyền")
+         //grid.Column("HinhAnh", "Mô tả", format: p => @Html.Raw("<img src=\"../Content/Pictures/" + p.HinhAnh+"\">"))
+         //  grid.Column(format: p => @Html.ActionLink("Chỉnh sửa", "PhanQuyen", new { id = p.MaLoaiTV }, new { @target = "_blank" })),
+         //grid.Column(format: p => @Html.ActionLink("Xóa", "PhanQuyen", new { id = p.MaLoaiTV }, new { @target = "_blank" })),
+         //grid.Column(format: p => @Html.ActionLink("Xem chi tiết", "PhanQuyen", new { id = p.MaLoaiTV }, new { @target = "_blank" }))
+
+    ))
+
+<style>
+    .gridTable {
+        border: 1px solid black;
+        width: 100%;
+    }
+
+    .gridHead > th > a {
+        color: #fff;
+    }
+
+    .gridHead {
+        background-color: darkgrey;
+    }
+
+    .gridFooter {
+        font-weight: bold;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .gridRow {
+        border: 1px solid black;
+        background-color: lightcyan;
+    }
+
+        .gridRow > tr, td {
+            border: 1px solid black;
+        }
+</style>

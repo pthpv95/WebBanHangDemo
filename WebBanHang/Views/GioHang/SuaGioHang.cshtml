@@ -1,0 +1,74 @@
+﻿@using WebBanHang.Models
+@model ItemGioHang
+@{
+    ViewBag.Title = "SuaGioHang";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+}
+@{ 
+    List<ItemGioHang> lstGioHang = ViewBag.GioHang as List<ItemGioHang>;
+}
+
+<style>
+    tr, td {
+        height: 30px;
+        vertical-align: top;
+        padding: 8px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+</style>
+<table class="tablegiohang">
+    <tr>
+        <td>Mã SP</td>
+        <td>Tên SP</td>
+        <td>Hinh ảnh</td>
+        <td>Đơn giá</td>
+        <td>Số lượng</td>
+        <td>Thành tiền</td>
+        <td></td>
+    </tr>
+    @foreach (var item in lstGioHang)
+    {
+        if (Model.MaSP == item.MaSP)
+        {
+            using (Html.BeginForm("CapNhatGioHang", "GioHang",FormMethod.Post))
+            {
+                <tr>
+                    <th>@item.MaSP @Html.Hidden("MaSP",item.MaSP)</th>
+                    <td>@item.TenSP</td>
+                    <td><img src="@Url.Content("~/Content/Pictures/"+ item.HinhAnh)" width="150" height="80" /></td>
+                    <td>@item.DonGia</td>
+                    <td>
+                        @Html.TextBox("SoLuong", item.SoLuong, new { @class = "SoLuongThayDoi" })
+                        <p id="TB_SoLuongThayDoi"></p>
+                    </td>
+                    <td>@item.ThanhTien đồng</td>
+                    <td><input type="submit" value="Cap nhat" class="btn btn-info" id="btnCapNhatGH"/></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th>@item.MaSP</th>
+                <td>@item.TenSP</td>
+                <td><img src="@Url.Content("~/Content/Pictures/"+ item.HinhAnh)" width="150" height="80" /></td>
+                <td>@item.SoLuong</td>
+                <td>@item.DonGia</td>
+                <td>@item.ThanhTien đồng</td>
+                <td>@Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP })</td>
+                <td>@Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP })</td>
+            </tr>
+        }
+    }
+</table>
+<script>
+    $("#btnCapNhatGH").click(function () {
+        //kiểm tra sộ lương không phải là số hoặc nhỏ hơn 0
+        var soluong = $(".SoLuongThayDoi").val();
+        if (isNaN(soluong) == true || soluong < 0) {
+            $("#TB_SoLuongThayDoi").text("Số lượng không hợp lệ");
+            return false;
+        }
+    })
+</script>
